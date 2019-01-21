@@ -41,6 +41,10 @@ public class HelloService {
         } catch (InterruptedException e) {
         }
 
+        if ((new Random().nextInt(10) <= 3)) {
+            throw new IllegalStateException("Big problem in my application");
+        }
+
         return hello + " " + name + "!";
     }
 
