@@ -16,6 +16,8 @@
  */
 package net.jmesnil;
 
+import java.util.Random;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -26,7 +28,6 @@ import org.eclipse.microprofile.opentracing.Traced;
 
 @Stateless
 @Traced
-@Counted
 public class HelloService {
 
     @Inject
@@ -34,6 +35,12 @@ public class HelloService {
     private String hello;
 
     public String createHelloMessage(String name) {
+
+        try {
+            Thread.sleep((long)(new Random()).nextInt(20));
+        } catch (InterruptedException e) {
+        }
+
         return hello + " " + name + "!";
     }
 

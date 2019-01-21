@@ -18,12 +18,10 @@ public class HealthProbe implements HealthCheck {
     @ConfigProperty(name="app.health.ratio", defaultValue = "0.8")
     private double healthRatio;
 
-    private final Random random = new Random();
-
     @Override
     public HealthCheckResponse call() {
         HealthCheckResponseBuilder check = HealthCheckResponse.named("app.healthCheck");
-        double val = random.nextDouble();
+        double val = (new Random()).nextDouble();
         if (val <= healthRatio) {
             return check
                     .withData("failure", Double.toString(val))
